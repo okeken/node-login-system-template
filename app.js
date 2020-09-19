@@ -1,25 +1,27 @@
 const express = require("express");
-
+const bodyParser = require("body-parser");
 const app = express();
+
+// Configuring body parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 PORT = parseInt(process.env.PORT, 10) || 3000;
 require("dotenv").config();
-const mongoose = require("mongoose");
 
-var bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
+//Routes Defined
 const Signup = require("./routes/users");
+const Login = require("./routes/users");
 
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
-
+//Home
 app.get("/", (req, res) => {
   res.send("Hello World! > ");
 });
-
 app.use("/", Signup);
+app.use("/", Login);
+
+//Database Configuration
+const mongoose = require("mongoose");
 
 mongoose.connect("mongodb://localhost/testdb", {
   useNewUrlParser: true,

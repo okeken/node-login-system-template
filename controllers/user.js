@@ -26,9 +26,9 @@ exports.deleteAllUsers = async (req, res) => {
   let results = await User.deleteMany();
   try {
     if (!results.deletedCount)
-      res.status(404).json({
+      return res.status(404).json({
         status: false,
-        message: "No users yet to delete",
+        message: "No users to delete",
       });
     res.status(200).json({
       status: true,
