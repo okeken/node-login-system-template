@@ -1,11 +1,19 @@
 const express = require("express");
-var bodyParser = require("body-parser");
+
 const app = express();
 
-PORT = process.env.PORT || 3000;
+PORT = parseInt(process.env.PORT, 10) || 3000;
 require("dotenv").config();
 const mongoose = require("mongoose");
+
+var bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 const Signup = require("./routes/users");
+
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => {
   res.send("Hello World! > ");

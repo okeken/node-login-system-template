@@ -4,7 +4,10 @@ const saltRouds = 12;
 
 exports.userRegistration = (req, res) => {
   const username = "req.body.username";
-  const password = " req.body.password";
+  const password = "req.body.password";
+
+  console.log("values", username, password);
+  console.log("val", req.params);
 
   (() => {
     !username || !password
